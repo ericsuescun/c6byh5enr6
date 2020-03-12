@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :tasks, only: [:api]
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+        resources :products, :only => [:index, :create, :update, :destroy]
+        # resources :users, :only => [:show, :create, :update, :destroy]
+      end
+  end
   resources :products
-  get "/api/v1/products", to: "products#api"
 end
